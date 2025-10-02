@@ -5,7 +5,14 @@
 # License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 # Source: https://github.com/wez/govee2mqtt
 
-source /dev/stdin <<<"$FUNCTIONS_FILE_PATH"
+# Source ProxmoxVE functions
+if [[ -n "$FUNCTIONS_FILE_PATH" ]]; then
+  source /dev/stdin <<<"$FUNCTIONS_FILE_PATH"
+else
+  # Standalone mode - source functions directly
+  source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/build.func)
+fi
+
 color
 verb_ip6
 catch_errors
