@@ -10,7 +10,7 @@ if [[ -n "$FUNCTIONS_FILE_PATH" ]]; then
   source /dev/stdin <<<"$FUNCTIONS_FILE_PATH"
 else
   # Standalone mode - source functions directly
-  source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/build.func)
+  source <(curl -fsSL https://raw.githubusercontent.com/sitapix/ProxmoxVE/main/misc/build.func)
 fi
 
 color
