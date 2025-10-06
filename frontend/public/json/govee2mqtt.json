@@ -1,0 +1,35 @@
+{
+  "name": "Govee2MQTT",
+  "slug": "govee2mqtt",
+  "categories": [
+    18
+  ],
+  "date_created": "2025-10-06",
+  "type": "ct",
+  "updateable": true,
+  "privileged": false,
+  "interface_port": 7474,
+  "documentation": "https://github.com/wez/govee2mqtt/blob/main/docs/CONFIG.md",
+  "website": "https://github.com/wez/govee2mqtt",
+  "logo": "https://raw.githubusercontent.com/wez/govee2mqtt/main/assets/favicon.ico",
+  "config_path": "/opt/govee2mqtt/.env",
+  "description": "Bridge for connecting Govee smart lights to Home Assistant via MQTT.",
+  "install_methods": [
+    {
+      "type": "default",
+      "script": "ct/govee2mqtt.sh",
+      "resources": {
+        "cpu": 1,
+        "ram": 256,
+        "hdd": 2,
+        "os": "debian",
+        "version": "12"
+      }
+    }
+  ],
+  "default_credentials": {
+    "username": null,
+    "password": null
+  },
+  "notes": []
+}
