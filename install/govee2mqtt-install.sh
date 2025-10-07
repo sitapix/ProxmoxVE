@@ -47,7 +47,7 @@ curl -fsSL -o "govee2mqtt-v${RELEASE}.tar.gz" "https://github.com/wez/govee2mqtt
 tar -xzf "govee2mqtt-v${RELEASE}.tar.gz" --quiet
 cd "govee2mqtt-${RELEASE}" || exit 1
 
-source ~/.cargo/env 2>/dev/null || export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 export CARGO_NET_RETRY=10
 export CARGO_HTTP_TIMEOUT=30
 export CARGO_BUILD_JOBS=1
