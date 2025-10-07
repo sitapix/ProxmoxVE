@@ -22,7 +22,7 @@ msg_ok "Installed Dependencies"
 
 msg_info "Installing Rust toolchain"
 if ! command -v cargo >/dev/null 2>&1; then
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain stable >/dev/null 2>&1
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain stable
   export PATH="$HOME/.cargo/bin:$PATH"
 fi
 msg_ok "Installed Rust toolchain"
@@ -52,7 +52,7 @@ export CARGO_NET_RETRY=10
 export CARGO_HTTP_TIMEOUT=30
 export CARGO_BUILD_JOBS=1
 
-$STD cargo build --release --bin govee --locked
+cargo build --release --bin govee --locked
 
 cp target/release/govee /opt/govee2mqtt/target/release/govee
 cp -r assets /opt/govee2mqtt/
