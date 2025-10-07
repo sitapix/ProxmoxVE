@@ -40,17 +40,8 @@ chown govee2mqtt:govee2mqtt /data/govee2mqtt /opt/govee2mqtt
 msg_ok "Created Govee2MQTT User"
 
 msg_info "Installing Govee2MQTT"
-
-# Since there are no releases, build from main branch
-COMMIT=$(curl -fsSL https://api.github.com/repos/wez/govee2mqtt/commits/main | grep '"sha"' | head -1 | awk '{print substr($2, 2, 7)}')
-msg_info "Building Govee2MQTT from main branch (${COMMIT})"
-
-TEMP_DIR=$(mktemp -d)
-cd "$TEMP_DIR" || exit 1
-
-curl -fsSL -o "govee2mqtt-main.tar.gz" "https://github.com/wez/govee2mqtt/archive/refs/heads/main.tar.gz"
-tar -xzf "govee2mqtt-main.tar.gz" --quiet
-cd "govee2mqtt-main" || exit 1
+$STD git clone https://github.com/wez/govee2mqtt.git /opt/govee2mqtt-build
+cd /opt/govee2mqtt-build || exit 1
 
 export PATH="$HOME/.cargo/bin:$PATH"
 export CARGO_NET_RETRY=10
@@ -63,11 +54,8 @@ cp target/release/govee /opt/govee2mqtt/target/release/govee
 cp -r assets /opt/govee2mqtt/
 cp AmazonRootCA1.pem /opt/govee2mqtt/
 
-echo "${RELEASE}" >/opt/Govee2MQTT_version.txt
-
 cd / || exit 1
-rm -rf "$TEMP_DIR"
-rm -f "govee2mqtt-v${RELEASE}.tar.gz"
+rm -rf /opt/govee2mqtt-build
 
 chmod +x /opt/govee2mqtt/target/release/govee
 chown -R govee2mqtt:govee2mqtt /opt/govee2mqtt
