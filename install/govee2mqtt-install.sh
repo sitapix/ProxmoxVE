@@ -24,15 +24,11 @@ msg_info "Installing Rust toolchain"
 if ! command -v cargo >/dev/null 2>&1; then
   # Clean up package cache to free space
   apt-get clean
-  # Set Rust install locations
-  export RUSTUP_HOME=/root/.rustup
-  export CARGO_HOME=/root/.cargo
-  # Download and install Rust with minimal profile
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o /tmp/rustup-init.sh
-  chmod +x /tmp/rustup-init.sh
-  /tmp/rustup-init.sh -y --default-toolchain stable --profile minimal --no-modify-path
-  rm /tmp/rustup-init.sh
-  export PATH="$CARGO_HOME/bin:$PATH"
+  # Install Rust with minimal profile (following vaultwarden pattern)
+  curl -fsSL https://sh.rustup.rs -o rustup-init.sh
+  bash rustup-init.sh -y --profile minimal
+  export PATH="$HOME/.cargo/bin:$PATH"
+  rm rustup-init.sh
 fi
 msg_ok "Installed Rust toolchain"
 
