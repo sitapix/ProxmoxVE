@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source <(curl -fsSL https://raw.githubusercontent.com/sitapix/ProxmoxVE/refs/heads/govee2mqtt-feat/misc/build.func)
+source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/build.func)
 # Copyright (c) 2021-2025 community-scripts ORG
 # Author: sitapix (sitapix)
 # License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
