@@ -22,7 +22,7 @@ msg_ok "Installed Dependencies"
 
 msg_info "Installing Rust toolchain"
 if ! command -v cargo >/dev/null 2>&1; then
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain stable
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain stable --profile minimal
   export PATH="$HOME/.cargo/bin:$PATH"
 fi
 msg_ok "Installed Rust toolchain"
