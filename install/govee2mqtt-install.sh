@@ -41,16 +41,16 @@ msg_ok "Created Govee2MQTT User"
 
 msg_info "Installing Govee2MQTT"
 
-RELEASE=$(curl -fsSL https://api.github.com/repos/wez/govee2mqtt/releases/latest | \
-  grep "tag_name" | awk '{print substr($2, 3, length($2)-4) }')
-msg_info "Building Govee2MQTT ${RELEASE} from source"
+# Since there are no releases, build from main branch
+COMMIT=$(curl -fsSL https://api.github.com/repos/wez/govee2mqtt/commits/main | grep '"sha"' | head -1 | awk '{print substr($2, 2, 7)}')
+msg_info "Building Govee2MQTT from main branch (${COMMIT})"
 
 TEMP_DIR=$(mktemp -d)
 cd "$TEMP_DIR" || exit 1
 
-curl -fsSL -o "govee2mqtt-v${RELEASE}.tar.gz" "https://github.com/wez/govee2mqtt/archive/refs/tags/v${RELEASE}.tar.gz"
-tar -xzf "govee2mqtt-v${RELEASE}.tar.gz" --quiet
-cd "govee2mqtt-${RELEASE}" || exit 1
+curl -fsSL -o "govee2mqtt-main.tar.gz" "https://github.com/wez/govee2mqtt/archive/refs/heads/main.tar.gz"
+tar -xzf "govee2mqtt-main.tar.gz" --quiet
+cd "govee2mqtt-main" || exit 1
 
 export PATH="$HOME/.cargo/bin:$PATH"
 export CARGO_NET_RETRY=10
