@@ -22,8 +22,17 @@ msg_ok "Installed Dependencies"
 
 msg_info "Installing Rust toolchain"
 if ! command -v cargo >/dev/null 2>&1; then
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain stable --profile minimal
-  export PATH="$HOME/.cargo/bin:$PATH"
+  # Clean up package cache to free space
+  apt-get clean
+  # Set Rust install locations
+  export RUSTUP_HOME=/root/.rustup
+  export CARGO_HOME=/root/.cargo
+  # Download and install Rust with minimal profile
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o /tmp/rustup-init.sh
+  chmod +x /tmp/rustup-init.sh
+  /tmp/rustup-init.sh -y --default-toolchain stable --profile minimal --no-modify-path
+  rm /tmp/rustup-init.sh
+  export PATH="$CARGO_HOME/bin:$PATH"
 fi
 msg_ok "Installed Rust toolchain"
 
